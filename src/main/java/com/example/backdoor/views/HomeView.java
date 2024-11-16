@@ -17,6 +17,10 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
+import com.example.backdoor.model.*;
+
+import com.example.backdoor.repos.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
@@ -26,10 +30,17 @@ import org.springframework.data.domain.PageRequest;
 @Uses(Icon.class)
 public class HomeView extends Composite<VerticalLayout> {
 
-    public HomeView() {
+    private final PropertyValueRepository propertyValueRepository;
+    private final RoleRepository roleRepository;
+
+    public HomeView(PropertyValueRepository propertyValueRepository, RoleRepository roleRepository) {
+        this.propertyValueRepository = propertyValueRepository;
+        this.roleRepository = roleRepository;
         FormLayout formLayout2Col = new FormLayout();
-        Grid basicGrid = new Grid();
-        Grid basicGrid2 = new Grid();
+
+        Grid<PropertyValue> basicGrid = new Grid<>(PropertyValue.class);
+        Grid<Role> basicGrid2 = new Grid<>(Role.class);
+
         HorizontalLayout layoutRow = new HorizontalLayout();
         //<theme-editor-local-classname>
         layoutRow.addClassName("home-view-horizontal-layout-1");
@@ -60,10 +71,10 @@ public class HomeView extends Composite<VerticalLayout> {
         grid1Header.addClassName("home-view-h2-1");
         basicGrid.setWidth("1000px");
         basicGrid.getStyle().set("flex-grow", "0");
-        setGridSampleData(basicGrid);
+        setGridSampleData_product(basicGrid);
         basicGrid2.setWidth("250px");
         basicGrid2.getStyle().set("flex-grow", "0");
-        setGridSampleData(basicGrid2);
+        setGridSampleData_roles(basicGrid2);
         layoutRow.setHeightFull();
         layoutRow.addClassName(Gap.MEDIUM);
         layoutRow.setWidth("100%");
@@ -99,9 +110,12 @@ public class HomeView extends Composite<VerticalLayout> {
         layoutRow2.add(buttonPrimary5);
     }
 
-    private void setGridSampleData(Grid grid) {
-        //        grid.setItems(query -> samplePersonService.list(
-        //                        PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
-        //                .stream());
+    private void setGridSampleData_product(Grid grid) {
+        grid.setItems(propertyValueRepository.findAll());
     }
+
+    private void setGridSampleData_roles(Grid grid) {
+        grid.setItems(roleRepository.findAll());
+    }
+
 }
