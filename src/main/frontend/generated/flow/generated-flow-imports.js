@@ -1,22 +1,12 @@
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
-<<<<<<< Updated upstream
-import '@vaadin/vertical-layout/src/vaadin-vertical-layout.js';
-import '@vaadin/field-highlighter/src/vaadin-field-highlighter.js';
-import '@vaadin/common-frontend/ConnectionIndicator.js';
-import '@vaadin/accordion/src/vaadin-accordion.js';
-import '@vaadin/details/src/vaadin-details.js';
-import '@vaadin/accordion/src/vaadin-accordion-panel.js';
-import '@vaadin/app-layout/src/vaadin-app-layout.js';
-import '@vaadin/button/src/vaadin-button.js';
-=======
 import '@vaadin/app-layout/theme/lumo/vaadin-app-layout.js';
+import '@vaadin/vertical-layout/theme/lumo/vaadin-vertical-layout.js';
 import '@vaadin/field-highlighter/theme/lumo/vaadin-field-highlighter.js';
 import '@vaadin/common-frontend/ConnectionIndicator.js';
 import '@vaadin/accordion/theme/lumo/vaadin-accordion.js';
 import '@vaadin/details/theme/lumo/vaadin-details.js';
 import '@vaadin/accordion/theme/lumo/vaadin-accordion-panel.js';
 import '@vaadin/button/theme/lumo/vaadin-button.js';
->>>>>>> Stashed changes
 import 'Frontend/generated/jar-resources/buttonFunctions.js';
 import '@vaadin/app-layout/theme/lumo/vaadin-drawer-toggle.js';
 import '@vaadin/avatar/theme/lumo/vaadin-avatar.js';
@@ -58,20 +48,11 @@ import 'Frontend/generated/jar-resources/menubarConnector.js';
 import '@vaadin/menu-bar/theme/lumo/vaadin-menu-bar.js';
 import '@vaadin/message-input/theme/lumo/vaadin-message-input.js';
 import 'Frontend/generated/jar-resources/messageListConnector.js';
-<<<<<<< Updated upstream
-import '@vaadin/message-list/src/vaadin-message-list.js';
-import '@vaadin/notification/src/vaadin-notification.js';
-import '@vaadin/horizontal-layout/src/vaadin-horizontal-layout.js';
-import '@vaadin/scroller/src/vaadin-scroller.js';
-import '@vaadin/popover/src/vaadin-popover.js';
-=======
 import '@vaadin/message-list/theme/lumo/vaadin-message-list.js';
 import '@vaadin/notification/theme/lumo/vaadin-notification.js';
 import '@vaadin/horizontal-layout/theme/lumo/vaadin-horizontal-layout.js';
 import '@vaadin/scroller/theme/lumo/vaadin-scroller.js';
-import '@vaadin/vertical-layout/theme/lumo/vaadin-vertical-layout.js';
 import '@vaadin/popover/theme/lumo/vaadin-popover.js';
->>>>>>> Stashed changes
 import 'Frontend/generated/jar-resources/vaadin-popover/popover.ts';
 import '@vaadin/progress-bar/theme/lumo/vaadin-progress-bar.js';
 import '@vaadin/radio-group/theme/lumo/vaadin-radio-button.js';

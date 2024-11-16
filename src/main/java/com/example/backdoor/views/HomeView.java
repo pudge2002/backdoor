@@ -54,7 +54,7 @@ public class HomeView extends Composite<VerticalLayout> {
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
         formLayout2Col.setWidth("100%");
-        H2 header = new H2("Список полисов");
+        H2 header = new H2("Список продуктов");
         H2 grid1Header = new H2("Список ролей");
         //<theme-editor-local-classname>
         grid1Header.addClassName("home-view-h2-1");

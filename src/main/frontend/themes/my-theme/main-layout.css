@@ -34,7 +34,7 @@ vaadin-app-layout::part(navbar) vaadin-tab {
 
 vaadin-side-nav-item {
     color: white;
-    background-color: gray;
+
 }
 
 vaadin-side-nav-item vaadin-icon {
