@@ -1,0 +1,50 @@
+vaadin-scroller[slot="drawer"] {
+  padding: var(--lumo-space-s);
+    background-color:#336699;  
+
+}
+
+vaadin-side-nav-item vaadin-icon {
+  padding: 0;
+}
+
+[slot="drawer"]:is(header, footer) {
+  display: flex;
+  align-items: center;
+  gap: var(--lumo-space-s);
+  padding: var(--lumo-space-s) var(--lumo-space-m);
+  min-height: var(--lumo-size-xl);
+  box-sizing: border-box;
+    background-color:#336699;  
+}
+
+[slot="drawer"]:is(header, footer):is(:empty) {
+  display: none;
+    background-color:#336699;  
+
+}
+vaadin-app-layout::part(navbar) {
+  background-color:#336699;  
+}
+
+vaadin-app-layout::part(navbar) vaadin-tab {
+  color: white;   
+}
+
+
+vaadin-side-nav-item {
+    color: white;
+
+}
+
+vaadin-side-nav-item vaadin-icon {
+    color: white;
+}
+vaadin-side-nav-item:hover {
+    background-color: white;
+}
+
+vaadin-side-nav-item[selected] {
+        background-color: white;
+}
+

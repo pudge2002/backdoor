@@ -1,0 +1,31 @@
+/*
+ * This file has been created by the Vaadin Theme Editor. Please note that
+ * manual changes to individual CSS properties may be overwritten by the theme editor.
+ */
+h1.main-layout-h1-1 { color:rgba(91,255,14,1); }
+
+h2.home-view-h2-1 { color:rgba(0,0,0,1); }
+
+html {
+  --lumo-primary-color-10pct:rgba(235,235,235,0.1);
+  --lumo-primary-color-50pct:rgba(235,235,235,0.5);
+  --lumo-primary-color:rgba(235,235,235,1);
+  --lumo-primary-text-color:rgba(255,255,255,1);
+}
+
+vaadin-button.home-view-button-1 {
+  background-color:rgba(207,0,31,1);
+  border-color:rgba(171,27,63,1);
+}
+
+vaadin-button.home-view-button-2 { background-color:rgba(207,0,31,1); }
+
+vaadin-button.home-view-button-3 { background-color:rgba(207,0,31,1); }
+
+vaadin-button.home-view-button-4 { background-color:rgba(207,0,31,1); }
+
+vaadin-button.home-view-button-5 { background-color:rgba(207,0,31,1); }
+
+vaadin-horizontal-layout.home-view-horizontal-layout-1 { background-color:rgba(176,176,176,1); }
+
+vaadin-horizontal-layout.home-view-horizontal-layout-2 { background-color:rgba(176,176,176,1); }
