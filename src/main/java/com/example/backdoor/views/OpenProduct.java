@@ -1,5 +1,9 @@
 package com.example.backdoor.views;
 
+import com.example.backdoor.model.Risk;
+import com.example.backdoor.model.Role;
+import com.example.backdoor.repos.PropertyValueRepository;
+import com.example.backdoor.repos.RoleRepository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -21,7 +25,9 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import com.example.backdoor.model.*;
 
+import com.example.backdoor.repos.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,12 +38,17 @@ import java.util.List;
 @Uses(Icon.class)
 public class   OpenProduct extends Composite<VerticalLayout> {
 
-    public   OpenProduct() {
+    private final RiskRepository riskRepository;
+    private final PropertySliceRelationRepository sliceRelationRepository;
+    public   OpenProduct(RiskRepository riskRepository, RoleRepository roleRepository, PropertySliceRelationRepository sliceRelationRepository) {
+        this.riskRepository = riskRepository;
+        this.sliceRelationRepository = sliceRelationRepository;
+
         FormLayout formLayout2Col = new FormLayout();
-        Grid basicGrid = new Grid();
+        Grid<PropertySliceRelation> basicGrid = new Grid(PropertySliceRelation.class);
         //<theme-editor-local-classname>
         basicGrid.addClassName("open-product-grid-1");
-        Grid basicGrid2 = new Grid();
+        Grid <Risk> basicGrid2 = new Grid(Risk.class);
         //<theme-editor-local-classname>
         basicGrid2.addClassName("open-product-grid-2");
         HorizontalLayout layoutRow = new HorizontalLayout();
@@ -65,15 +76,15 @@ public class   OpenProduct extends Composite<VerticalLayout> {
         getContent().getStyle().set("flex-grow", "1");
         formLayout2Col.setWidth("100%");
         H2 header = new H2("Стратегии");
-        H2 grid1Header = new H2("Список ролей");
+        H2 grid1Header = new H2("Риски");
         //<theme-editor-local-classname>
         grid1Header.addClassName("home-view-h2-1");
         basicGrid.setWidth("1000px");
         basicGrid.getStyle().set("flex-grow", "0");
-        setGridSampleData(basicGrid);
+        setGridSampleDataStrategy(basicGrid);
         basicGrid2.setWidth("250px");
         basicGrid2.getStyle().set("flex-grow", "0");
-        setGridSampleData(basicGrid2);
+        setGridSampleDataRisk(basicGrid2);
         layoutRow.setHeightFull();
         layoutRow.addClassName(Gap.MEDIUM);
         layoutRow.setWidth("100%");
@@ -100,6 +111,10 @@ public class   OpenProduct extends Composite<VerticalLayout> {
 
         List<String> prod = new ArrayList<>(Arrays.asList("ржака", "ахахахахd"));
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
+        //<theme-editor-local-classname>
+        allProducts.setOverlayClassName("open-product-combo-box-1");
+        //<theme-editor-local-classname>
+        allProducts.addClassName("open-product-combo-box-1");
         TextField name = new TextField();
         TextField typeStrah =  new TextField();
         name.setLabel("Наименование");
@@ -117,9 +132,10 @@ public class   OpenProduct extends Composite<VerticalLayout> {
         hl.add(new H1("dsdsds"));
     }
 
-    private void setGridSampleData(Grid grid) {
-        //        grid.setItems(query -> samplePersonService.list(
-        //                        PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
-        //                .stream());
+    private void setGridSampleDataStrategy(Grid grid) {
+        grid.setItems(sliceRelationRepository.findAll());
+    }
+    private void setGridSampleDataRisk(Grid grid) {
+        grid.setItems(riskRepository.findAll());
     }
 }
