@@ -29,6 +29,10 @@ public class PropertyValue {
     @JoinColumn(name = "slice_value_id")
     private SliceValue sliceValue;
 
+    @ManyToOne
+    @JoinColumn(name = "id_risk")
+    private Risk risk;
+
     @Column(name = "value")
     private String value;
 
@@ -66,6 +70,14 @@ public class PropertyValue {
 
     public void setSliceValue(SliceValue sliceValue) {
         this.sliceValue = sliceValue;
+    }
+
+    public Risk getRisk() {
+        return risk;
+    }
+
+    public void setRisk(Risk risk) {
+        this.risk = risk;
     }
 
     public String getValue() {

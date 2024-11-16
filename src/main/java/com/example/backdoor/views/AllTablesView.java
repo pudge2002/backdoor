@@ -9,7 +9,7 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route("all-tables")
-public class MainView extends VerticalLayout {
+public class AllTablesView extends VerticalLayout {
 
     private final ProductRepository productRepository;
     private final PropertyRepository propertyRepository;
@@ -21,9 +21,10 @@ public class MainView extends VerticalLayout {
     private final RoleRepository roleRepository;
     private final UserRoleRepository userRoleRepository;
     private final ProductAccessRepository productAccessRepository;
+    private final RiskRepository riskRepository;
 
     @Autowired
-    public MainView(ProductRepository productRepository,
+    public AllTablesView(ProductRepository productRepository,
                          PropertyRepository propertyRepository,
                          SliceRepository sliceRepository,
                          SliceValueRepository sliceValueRepository,
@@ -32,7 +33,8 @@ public class MainView extends VerticalLayout {
                          UserRepository userRepository,
                          RoleRepository roleRepository,
                          UserRoleRepository userRoleRepository,
-                         ProductAccessRepository productAccessRepository) {
+                         ProductAccessRepository productAccessRepository,
+                         RiskRepository riskRepository) {
         this.productRepository = productRepository;
         this.propertyRepository = propertyRepository;
         this.sliceRepository = sliceRepository;
@@ -43,6 +45,7 @@ public class MainView extends VerticalLayout {
         this.roleRepository = roleRepository;
         this.userRoleRepository = userRoleRepository;
         this.productAccessRepository = productAccessRepository;
+        this.riskRepository = riskRepository;
 
         add(createProductGrid());
         add(createPropertyGrid());
@@ -54,9 +57,8 @@ public class MainView extends VerticalLayout {
         add(createRoleGrid());
         add(createUserRoleGrid());
         add(createProductAccessGrid());
+        add(createRiskGrid());
     }
-
-
 
     private Grid<Product> createProductGrid() {
         Grid<Product> grid = new Grid<>(Product.class);
@@ -100,6 +102,7 @@ public class MainView extends VerticalLayout {
         Grid<PropertyValue> grid = new Grid<>(PropertyValue.class);
         grid.setItems(propertyValueRepository.findAll());
         grid.addColumn(PropertyValue::getValue).setHeader("Value");
+        grid.addColumn(propertyValue -> propertyValue.getRisk().getDescription()).setHeader("Risk Description");
         return grid;
     }
 
@@ -131,6 +134,14 @@ public class MainView extends VerticalLayout {
         grid.setItems(productAccessRepository.findAll());
         grid.addColumn(access -> access.getUserRole().getUser().getUsername()).setHeader("Username");
         grid.addColumn(access -> access.getProduct().getName()).setHeader("Product Name");
+        return grid;
+    }
+
+    private Grid<Risk> createRiskGrid() {
+        Grid<Risk> grid = new Grid<>(Risk.class);
+        grid.setItems(riskRepository.findAll());
+        grid.addColumn(Risk::getDescription).setHeader("Risk Description");
+        grid.addColumn(Risk::getLevel).setHeader("Risk Level");
         return grid;
     }
 }
