@@ -1,5 +1,6 @@
 package com.example.backdoor.views;
 
+import com.example.backdoor.model.ProductView;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -18,11 +19,10 @@ import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
-import com.example.backdoor.model.PropertyValue;
+import com.example.backdoor.model.ProductView;
 import com.example.backdoor.model.Role;
-import com.example.backdoor.repos.PropertyValueRepository;
+import com.example.backdoor.repos.ProductAccessRepository;
 import com.example.backdoor.repos.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("Список продуктов")
 @Route("")
@@ -30,15 +30,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Uses(Icon.class)
 public class HomeView extends Composite<VerticalLayout> {
 
-    private final PropertyValueRepository propertyValueRepository;
+    private final ProductAccessRepository productAccessRepository;
     private final RoleRepository roleRepository;
 
-    public HomeView(PropertyValueRepository propertyValueRepository, RoleRepository roleRepository) {
-        this.propertyValueRepository = propertyValueRepository;
+    public HomeView(ProductAccessRepository productAccessRepository, RoleRepository roleRepository) {
+        this.productAccessRepository = productAccessRepository;
         this.roleRepository = roleRepository;
         FormLayout formLayout2Col = new FormLayout();
 
-        Grid<PropertyValue> basicGrid = new Grid<>(PropertyValue.class);
+        Grid<ProductView> basicGrid = new Grid<>(ProductView.class);
         basicGrid.addClassName("home-view-grid-1");
         Grid<Role> basicGrid2 = new Grid<>(Role.class);
         basicGrid2.addClassName("home-view-grid-2");
@@ -105,7 +105,7 @@ public class HomeView extends Composite<VerticalLayout> {
 
         // Добавление обработчика событий для кнопки "Редактирование"
         buttonPrimary4.addClickListener(event -> {
-            PropertyValue selectedItem = basicGrid.asSingleSelect().getValue();
+            ProductView selectedItem = basicGrid.asSingleSelect().getValue();
             if (selectedItem != null) {
                 showEditDialog(selectedItem);
             } else {
@@ -116,7 +116,7 @@ public class HomeView extends Composite<VerticalLayout> {
         buttonPrimary2.addClickListener(event -> {  UI.getCurrent().navigate("op"); });
     }
 
-    private void showEditDialog(PropertyValue propertyValue) {
+    private void showEditDialog(ProductView propertyValue) {
         Dialog dialog = new Dialog();
         dialog.setWidth("400px");
         dialog.setHeight("300px");
@@ -129,27 +129,27 @@ public class HomeView extends Composite<VerticalLayout> {
         TextField nameField = new TextField("Name");
         nameField.setValue(propertyValue.getProduct().getName());
         TextField valueField = new TextField("Value");
-        valueField.setValue(propertyValue.getValue());
+//        valueField.setValue(propertyValue.getValue());
 
-        Button saveButton = new Button("Сохранить", event -> {
-            propertyValue.setValue(valueField.getValue());
-            propertyValueRepository.save(propertyValue);
-            dialog.close();
-        });
-        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
-        Button cancelButton = new Button("Отмена", event -> dialog.close());
-
-        HorizontalLayout buttonLayout = new HorizontalLayout(saveButton, cancelButton);
-        buttonLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
-
-        dialogLayout.add(nameField, valueField, buttonLayout);
-        dialog.add(dialogLayout);
-        dialog.open();
+//        Button saveButton = new Button("Сохранить", event -> {
+//            propertyValue.setValue(valueField.getValue());
+//            productAccessRepository.save(propertyValue);
+//            dialog.close();
+//        });
+//        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+//
+//        Button cancelButton = new Button("Отмена", event -> dialog.close());
+//
+//        HorizontalLayout buttonLayout = new HorizontalLayout(saveButton, cancelButton);
+//        buttonLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+//
+//        dialogLayout.add(nameField, valueField, buttonLayout);
+//        dialog.add(dialogLayout);
+//        dialog.open();
     }
 
     private void setGridSampleData_product(Grid grid) {
-        grid.setItems(propertyValueRepository.findAll());
+        grid.setItems(productAccessRepository.findAll());
     }
 
     private void setGridSampleData_roles(Grid grid) {

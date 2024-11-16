@@ -12,10 +12,10 @@ import jakarta.persistence.Column;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "object_id")
+    @Column(name = "product_id")
     private Long id;
 
-    @Column(name = "object_name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Product() {

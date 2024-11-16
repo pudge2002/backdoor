@@ -1,8 +1,6 @@
 package com.example.backdoor.views;
 
 import com.example.backdoor.model.Risk;
-import com.example.backdoor.model.Role;
-import com.example.backdoor.repos.PropertyValueRepository;
 import com.example.backdoor.repos.RoleRepository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
@@ -21,16 +19,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import com.example.backdoor.model.*;
 
 import com.example.backdoor.repos.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 @PageTitle("Продукт")
@@ -40,15 +34,15 @@ import java.util.List;
 public class   OpenProduct extends Composite<VerticalLayout> {
 
     private final RiskRepository riskRepository;
-    private final PropertySliceRelationRepository sliceRelationRepository;
+    private final ProductParametrsRelationRepository sliceRelationRepository;
     private final  ProductRepository productRepository;
-    public   OpenProduct(RiskRepository riskRepository, RoleRepository roleRepository, PropertySliceRelationRepository sliceRelationRepository, ProductRepository productRepository) {
+    public   OpenProduct(RiskRepository riskRepository, RoleRepository roleRepository, ProductParametrsRelationRepository sliceRelationRepository, ProductRepository productRepository) {
         this.riskRepository = riskRepository;
         this.sliceRelationRepository = sliceRelationRepository;
         this.productRepository = productRepository;
 
         FormLayout formLayout2Col = new FormLayout();
-        Grid<PropertySliceRelation> basicGrid = new Grid(PropertySliceRelation.class);
+        Grid<ProductParametrsRelation> basicGrid = new Grid(ProductParametrsRelation.class);
         //<theme-editor-local-classname>
         basicGrid.addClassName("open-product-grid-1");
         Grid <Risk> basicGrid2 = new Grid(Risk.class);

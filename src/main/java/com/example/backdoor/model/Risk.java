@@ -1,11 +1,6 @@
 package com.example.backdoor.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "risks")
@@ -15,11 +10,15 @@ public class Risk {
     @Column(name = "risk_id")
     private Long id;
 
-    @Column(name = "risk_description", nullable = false)
-    private String description;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "risk_level", nullable = false)
+    @Column(name = "level", nullable = false)
     private Float level;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     public Risk() {
     }
@@ -33,12 +32,12 @@ public class Risk {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Float getLevel() {
@@ -49,11 +48,20 @@ public class Risk {
         this.level = level;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "Risk{" +
-                "level=" + level +
-                ", description='" + description + '\'' +
+                "product=" + product +
+                ", level=" + level +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

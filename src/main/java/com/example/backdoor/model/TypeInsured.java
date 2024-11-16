@@ -10,21 +10,21 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
 @Entity
-@Table(name = "slice_values")
-public class SliceValue {
+@Table(name = "type_insured")
+public class TypeInsured {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "slice_value_id")
+    @Column(name = "id_type_insured")
     private Long id;
 
+    @Column(name = "type", nullable = false)
+    private String type;
+
     @ManyToOne
-    @JoinColumn(name = "slice_id", nullable = false)
-    private Slice slice;
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
-    @Column(name = "value", nullable = false)
-    private String value;
-
-    public SliceValue() {
+    public TypeInsured() {
     }
 
     // Геттеры и сеттеры
@@ -36,28 +36,27 @@ public class SliceValue {
         this.id = id;
     }
 
-    public Slice getSlice() {
-        return slice;
+    public String getType() {
+        return type;
     }
 
-    public void setSlice(Slice slice) {
-        this.slice = slice;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getValue() {
-        return value;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public String toString() {
-        return "SliceValue{" +
-                "id=" + id +
-                ", slice=" + slice +
-                ", value='" + value + '\'' +
+        return "TypeInsured{" +
+                "product=" + product +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

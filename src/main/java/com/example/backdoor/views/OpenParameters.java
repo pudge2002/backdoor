@@ -1,13 +1,12 @@
 package com.example.backdoor.views;
 
 import com.example.backdoor.model.Product;
-import com.example.backdoor.model.Property;
+import com.example.backdoor.model.Parametrs;
 
+import com.example.backdoor.repos.ParametrsRepository;
 import com.example.backdoor.repos.ProductRepository;
-import com.example.backdoor.repos.PropertyRepository;
-import com.example.backdoor.repos.RiskRepository;
+import com.example.backdoor.repos.TypeInsuredRepository;
 import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -25,14 +24,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @PageTitle("Параметры")
@@ -40,16 +33,17 @@ import java.util.List;
 @Menu(order = 1, icon = "line-awesome/svg/pencil-ruler-solid.svg")
 @Uses(Icon.class)
 public class  OpenParameters extends Composite<VerticalLayout> {
-    private final PropertyRepository propertyRepository;
+    private final ParametrsRepository parametrsRepository;
     private final ProductRepository productRepository;
-    public   OpenParameters(PropertyRepository propertyRepository, ProductRepository productRepository) {
-        this.propertyRepository = propertyRepository;
+    public OpenParameters(ParametrsRepository parametrsRepository, ParametrsRepository parametrsRepository1, ProductRepository productRepository) {
+        this.parametrsRepository = parametrsRepository1;
+
         this.productRepository = productRepository;
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();
         //<theme-editor-local-classname>
         basicGrid.addClassName("open-product-grid-1");
-        Grid<Property> basicGrid2 = new Grid(Property.class);
+        Grid<Parametrs> basicGrid2 = new Grid(Parametrs.class);
         //<theme-editor-local-classname>
         basicGrid2.addClassName("open-product-grid-2");
         HorizontalLayout layoutRow = new HorizontalLayout();
@@ -148,7 +142,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         hl.add(new H1("dsdsds"));
 
         addRisk.addClickListener(event -> {
-            Property selectedItem = (Property) basicGrid2.asSingleSelect().getValue();
+            Parametrs selectedItem = (Parametrs) basicGrid2.asSingleSelect().getValue();
             System.out.println("open");
             if (selectedItem != null) {
                 showEditDialog(selectedItem);
@@ -158,7 +152,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         });
     }
 
-    private void showEditDialog(Property property) {
+    private void showEditDialog(Parametrs property) {
         Dialog dialog = new Dialog();
         dialog.setWidth("400px");
         dialog.setHeight("300px");
@@ -174,7 +168,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         Button saveButton = new Button("Сохранить", event -> {
             property.setName(nameField.getValue());
 
-            propertyRepository.save(property);
+            parametrsRepository.save(property);
             dialog.close();
         });
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -190,7 +184,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
     }
 
     private void setGridSampleData(Grid grid) {
-        grid.setItems(propertyRepository.findAll());
+        grid.setItems(parametrsRepository.findAll());
 
     }
 }

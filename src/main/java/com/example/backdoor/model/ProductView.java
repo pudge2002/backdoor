@@ -10,22 +10,26 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
 @Entity
-@Table(name = "product_access")
-public class ProductAccess {
+@Table(name = "product_view")
+public class ProductView {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "product_view_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_roles_id", nullable = false)
-    private UserRole userRole;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    public ProductAccess() {
+    @ManyToOne
+    @JoinColumn(name = "id_risk")
+    private Risk risk;
+
+    @ManyToOne
+    @JoinColumn(name = "id_type_insured")
+    private TypeInsured typeInsured;
+
+    public ProductView() {
     }
 
     // Геттеры и сеттеры
@@ -37,14 +41,6 @@ public class ProductAccess {
         this.id = id;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -53,12 +49,28 @@ public class ProductAccess {
         this.product = product;
     }
 
+    public Risk getRisk() {
+        return risk;
+    }
+
+    public void setRisk(Risk risk) {
+        this.risk = risk;
+    }
+
+    public TypeInsured getTypeInsured() {
+        return typeInsured;
+    }
+
+    public void setTypeInsured(TypeInsured typeInsured) {
+        this.typeInsured = typeInsured;
+    }
+
     @Override
     public String toString() {
-        return "ProductAccess{" +
-                "userRole=" + userRole +
-                ", product=" + product +
+        return "ProductView{" +
+                "product=" + product +
+                ", risk=" + risk +
+                ", typeInsured=" + typeInsured +
                 '}';
     }
 }
-

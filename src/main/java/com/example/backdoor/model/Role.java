@@ -15,7 +15,7 @@ public class Role {
     @Column(name = "role_id")
     private Long id;
 
-    @Column(name = "role_name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     public Role() {
@@ -40,6 +40,8 @@ public class Role {
 
     @Override
     public String toString() {
-        return name;
+        return "Role{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

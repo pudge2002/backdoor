@@ -1,11 +1,6 @@
 package com.example.backdoor.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "slices")
@@ -15,8 +10,15 @@ public class Slice {
     @Column(name = "slice_id")
     private Long id;
 
-    @Column(name = "slice_name", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "parameters_id", nullable = false)
+    private Parametrs parametrs;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "value", nullable = false)
+    private String value;
 
     public Slice() {
     }
@@ -30,6 +32,14 @@ public class Slice {
         this.id = id;
     }
 
+    public Parametrs getParametrs() {
+        return parametrs;
+    }
+
+    public void setParametrs(Parametrs parametrs) {
+        this.parametrs = parametrs;
+    }
+
     public String getName() {
         return name;
     }
@@ -38,11 +48,20 @@ public class Slice {
         this.name = name;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "Slice{" +
-                "id=" + id +
+                "value='" + value + '\'' +
                 ", name='" + name + '\'' +
+                ", parametrs=" + parametrs +
                 '}';
     }
 }

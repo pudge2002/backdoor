@@ -10,22 +10,22 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
 @Entity
-@Table(name = "product_access")
-public class ProductAccess {
+@Table(name = "product_parameters_relations")
+public class ProductParametrsRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "parameters_slice_relations_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_roles_id", nullable = false)
-    private UserRole userRole;
+    @JoinColumn(name = "parameters_id", nullable = false)
+    private Parametrs parametrs;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    public ProductAccess() {
+    public ProductParametrsRelation() {
     }
 
     // Геттеры и сеттеры
@@ -37,12 +37,12 @@ public class ProductAccess {
         this.id = id;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public Parametrs getParametrs() {
+        return parametrs;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setParametrs(Parametrs parametrs) {
+        this.parametrs = parametrs;
     }
 
     public Product getProduct() {
@@ -55,10 +55,9 @@ public class ProductAccess {
 
     @Override
     public String toString() {
-        return "ProductAccess{" +
-                "userRole=" + userRole +
-                ", product=" + product +
+        return "ProductParametrsRelation{" +
+                "product=" + product +
+                ", parametrs=" + parametrs +
                 '}';
     }
 }
-

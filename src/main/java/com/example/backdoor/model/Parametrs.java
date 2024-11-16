@@ -1,5 +1,6 @@
 package com.example.backdoor.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,23 +9,30 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
 @Entity
-@Table(name = "properties")
-public class Property {
+@Table(name = "parameters")
+public class Parametrs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "property_id")
+    @Column(name = "parameters_id")
     private Long id;
 
-    @Column(name = "property_name", nullable = false)
+
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "property_type", nullable = false)
+
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "scalar_type")
-    private String scalarType;
 
-    public Property() {
+    @Column(name = "value")
+    private String value;
+
+
+    @Column(name = "number_of_slices")
+    private Integer sliceCount;
+
+    public Parametrs() {
     }
 
     // Геттеры и сеттеры
@@ -52,21 +60,29 @@ public class Property {
         this.type = type;
     }
 
-    public String getScalarType() {
-        return scalarType;
+    public String getValue() {
+        return value;
     }
 
-    public void setScalarType(String scalarType) {
-        this.scalarType = scalarType;
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Integer getSliceCount() {
+        return sliceCount;
+    }
+
+    public void setSliceCount(Integer sliceCount) {
+        this.sliceCount = sliceCount;
     }
 
     @Override
     public String toString() {
-        return "Property{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "Parametrs{" +
+                "sliceCount=" + sliceCount +
+                ", value='" + value + '\'' +
                 ", type='" + type + '\'' +
-                ", scalarType='" + scalarType + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
