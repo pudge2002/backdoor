@@ -5,6 +5,7 @@ import com.example.backdoor.model.Role;
 import com.example.backdoor.repos.PropertyValueRepository;
 import com.example.backdoor.repos.RoleRepository;
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -110,6 +111,7 @@ public class   OpenProduct extends Composite<VerticalLayout> {
         delRisk.setText("Отвязать");
         delRisk.setWidth("min-content");
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        buttonPrimary3.addClickListener(event -> {  UI.getCurrent().navigate("param"); });
 
         List<Product> prod = productRepository.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);

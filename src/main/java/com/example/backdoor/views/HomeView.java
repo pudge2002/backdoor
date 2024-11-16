@@ -1,6 +1,7 @@
 package com.example.backdoor.views;
 
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.Uses;
@@ -111,6 +112,8 @@ public class HomeView extends Composite<VerticalLayout> {
                 System.out.println("Ничего не выбрано");
             }
         });
+        buttonPrimary3.addClickListener(event -> {  UI.getCurrent().navigate("param"); });
+        buttonPrimary2.addClickListener(event -> {  UI.getCurrent().navigate("op"); });
     }
 
     private void showEditDialog(PropertyValue propertyValue) {
@@ -129,7 +132,6 @@ public class HomeView extends Composite<VerticalLayout> {
         valueField.setValue(propertyValue.getValue());
 
         Button saveButton = new Button("Сохранить", event -> {
-            propertyValue.setValue(nameField.getValue());
             propertyValue.setValue(valueField.getValue());
             propertyValueRepository.save(propertyValue);
             dialog.close();

@@ -2,14 +2,12 @@ package com.example.backdoor.views;
 
 import com.example.backdoor.model.Product;
 import com.example.backdoor.model.Property;
-<<<<<<< Updated upstream
+
 import com.example.backdoor.repos.ProductRepository;
-=======
-import com.example.backdoor.model.PropertyValue;
->>>>>>> Stashed changes
 import com.example.backdoor.repos.PropertyRepository;
 import com.example.backdoor.repos.RiskRepository;
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -148,8 +146,10 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         layoutRow2.setHeight("min-content");
         HorizontalLayout hl = new HorizontalLayout();
         hl.add(new H1("dsdsds"));
+
         addRisk.addClickListener(event -> {
-            Property selectedItem = basicGrid.asSingleSelect().getValue();
+            Property selectedItem = (Property) basicGrid2.asSingleSelect().getValue();
+            System.out.println("open");
             if (selectedItem != null) {
                 showEditDialog(selectedItem);
             } else {
@@ -158,7 +158,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         });
     }
 
-    private void showEditDialog(PropertyRepository propertyRepository) {
+    private void showEditDialog(Property property) {
         Dialog dialog = new Dialog();
         dialog.setWidth("400px");
         dialog.setHeight("300px");
@@ -169,12 +169,12 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         dialogLayout.getStyle().set("padding", "var(--lumo-space-m)");
 
         TextField nameField = new TextField("Name");
-        nameField.setValue(propertyRepository.getClass().getName());
+        nameField.setValue(property.getName());
 
         Button saveButton = new Button("Сохранить", event -> {
-            propertyRepository.set(nameField.getValue());
+            property.setName(nameField.getValue());
 
-            propertyRepository.save(propertyRepository);
+            propertyRepository.save(property);
             dialog.close();
         });
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -184,7 +184,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         HorizontalLayout buttonLayout = new HorizontalLayout(saveButton, cancelButton);
         buttonLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
-        dialogLayout.add(nameField, valueField, buttonLayout);
+        dialogLayout.add(nameField, buttonLayout);
         dialog.add(dialogLayout);
         dialog.open();
     }
