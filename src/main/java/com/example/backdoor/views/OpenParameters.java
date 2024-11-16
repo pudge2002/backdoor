@@ -2,7 +2,11 @@ package com.example.backdoor.views;
 
 import com.example.backdoor.model.Product;
 import com.example.backdoor.model.Property;
+<<<<<<< Updated upstream
 import com.example.backdoor.repos.ProductRepository;
+=======
+import com.example.backdoor.model.PropertyValue;
+>>>>>>> Stashed changes
 import com.example.backdoor.repos.PropertyRepository;
 import com.example.backdoor.repos.RiskRepository;
 import com.vaadin.flow.component.Composite;
@@ -10,6 +14,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.Uses;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
@@ -143,6 +148,45 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         layoutRow2.setHeight("min-content");
         HorizontalLayout hl = new HorizontalLayout();
         hl.add(new H1("dsdsds"));
+        addRisk.addClickListener(event -> {
+            Property selectedItem = basicGrid.asSingleSelect().getValue();
+            if (selectedItem != null) {
+                showEditDialog(selectedItem);
+            } else {
+                System.out.println("Ничего не выбрано");
+            }
+        });
+    }
+
+    private void showEditDialog(PropertyRepository propertyRepository) {
+        Dialog dialog = new Dialog();
+        dialog.setWidth("400px");
+        dialog.setHeight("300px");
+
+        VerticalLayout dialogLayout = new VerticalLayout();
+        dialogLayout.setPadding(false);
+        dialogLayout.setSpacing(false);
+        dialogLayout.getStyle().set("padding", "var(--lumo-space-m)");
+
+        TextField nameField = new TextField("Name");
+        nameField.setValue(propertyRepository.getClass().getName());
+
+        Button saveButton = new Button("Сохранить", event -> {
+            propertyRepository.set(nameField.getValue());
+
+            propertyRepository.save(propertyRepository);
+            dialog.close();
+        });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        Button cancelButton = new Button("Отмена", event -> dialog.close());
+
+        HorizontalLayout buttonLayout = new HorizontalLayout(saveButton, cancelButton);
+        buttonLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+
+        dialogLayout.add(nameField, valueField, buttonLayout);
+        dialog.add(dialogLayout);
+        dialog.open();
     }
 
     private void setGridSampleData(Grid grid) {
