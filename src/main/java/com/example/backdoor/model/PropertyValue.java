@@ -75,4 +75,15 @@ public class PropertyValue {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "PropertyValue{" +
+                "id=" + id +
+                ", product=" + product +
+                ", propertySliceRelation=" + propertySliceRelation +
+                ", sliceValue=" + sliceValue +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

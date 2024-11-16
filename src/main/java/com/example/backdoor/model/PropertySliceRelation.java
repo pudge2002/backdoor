@@ -52,4 +52,13 @@ public class PropertySliceRelation {
     public void setSlice(Slice slice) {
         this.slice = slice;
     }
+
+    @Override
+    public String toString() {
+        return "PropertySliceRelation{" +
+                "id=" + id +
+                ", property=" + property +
+                ", slice=" + slice +
+                '}';
+    }
 }

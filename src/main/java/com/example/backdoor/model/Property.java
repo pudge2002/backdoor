@@ -59,5 +59,15 @@ public class Property {
     public void setScalarType(String scalarType) {
         this.scalarType = scalarType;
     }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", scalarType='" + scalarType + '\'' +
+                '}';
+    }
 }
 

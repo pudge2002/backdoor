@@ -52,5 +52,14 @@ public class ProductAccess {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "ProductAccess{" +
+                "id=" + id +
+                ", userRole=" + userRole +
+                ", product=" + product +
+                '}';
+    }
 }
 

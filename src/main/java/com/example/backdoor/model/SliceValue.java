@@ -51,4 +51,13 @@ public class SliceValue {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "SliceValue{" +
+                "id=" + id +
+                ", slice=" + slice +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
