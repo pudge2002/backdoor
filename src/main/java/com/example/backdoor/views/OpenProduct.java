@@ -40,9 +40,11 @@ public class   OpenProduct extends Composite<VerticalLayout> {
 
     private final RiskRepository riskRepository;
     private final PropertySliceRelationRepository sliceRelationRepository;
-    public   OpenProduct(RiskRepository riskRepository, RoleRepository roleRepository, PropertySliceRelationRepository sliceRelationRepository) {
+    private final  ProductRepository productRepository;
+    public   OpenProduct(RiskRepository riskRepository, RoleRepository roleRepository, PropertySliceRelationRepository sliceRelationRepository, ProductRepository productRepository) {
         this.riskRepository = riskRepository;
         this.sliceRelationRepository = sliceRelationRepository;
+        this.productRepository = productRepository;
 
         FormLayout formLayout2Col = new FormLayout();
         Grid<PropertySliceRelation> basicGrid = new Grid(PropertySliceRelation.class);
@@ -109,7 +111,7 @@ public class   OpenProduct extends Composite<VerticalLayout> {
         delRisk.setWidth("min-content");
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        List<String> prod = new ArrayList<>(Arrays.asList("ржака", "ахахахахd"));
+        List<Product> prod = productRepository.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-product-combo-box-1");

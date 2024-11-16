@@ -1,6 +1,8 @@
 package com.example.backdoor.views;
 
+import com.example.backdoor.model.Product;
 import com.example.backdoor.model.Property;
+import com.example.backdoor.repos.ProductRepository;
 import com.example.backdoor.repos.PropertyRepository;
 import com.example.backdoor.repos.RiskRepository;
 import com.vaadin.flow.component.Composite;
@@ -36,9 +38,10 @@ import java.util.List;
 @Uses(Icon.class)
 public class  OpenParameters extends Composite<VerticalLayout> {
     private final PropertyRepository propertyRepository;
-
-    public   OpenParameters(PropertyRepository propertyRepository) {
+    private final ProductRepository productRepository;
+    public   OpenParameters(PropertyRepository propertyRepository, ProductRepository productRepository) {
         this.propertyRepository = propertyRepository;
+        this.productRepository = productRepository;
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();
         //<theme-editor-local-classname>
@@ -104,7 +107,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         delRisk.setWidth("min-content");
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        List<String> prod = new ArrayList<>(Arrays.asList("ржака", "ахахахахd"));
+        List<Product> prod = productRepository.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-parameters-combo-box-1");
