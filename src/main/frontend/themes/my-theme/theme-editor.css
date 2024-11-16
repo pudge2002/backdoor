@@ -7,9 +7,9 @@ h1.main-layout-h1-1 { color:rgba(91,255,14,1); }
 h2.home-view-h2-1 { color:rgba(0,0,0,1); }
 
 html {
-  --lumo-primary-color-10pct:rgba(235,235,235,0.1);
-  --lumo-primary-color-50pct:rgba(235,235,235,0.5);
-  --lumo-primary-color:rgba(235,235,235,1);
+  --lumo-primary-color-10pct:rgba(252,242,244,0.1);
+  --lumo-primary-color-50pct:rgba(252,242,244,0.5);
+  --lumo-primary-color:rgba(252,242,244,1);
   --lumo-primary-text-color:rgba(255,255,255,1);
 }
 
@@ -25,6 +25,38 @@ vaadin-button.home-view-button-3 { background-color:rgba(207,0,31,1); }
 vaadin-button.home-view-button-4 { background-color:rgba(207,0,31,1); }
 
 vaadin-button.home-view-button-5 { background-color:rgba(207,0,31,1); }
+
+vaadin-grid {
+  border-color:rgba(105,105,105,0);
+  border-width:0px;
+}
+
+vaadin-grid.home-view-grid-1::part(body-cell) { background-color:rgba(247,14,14,0); }
+
+vaadin-grid.home-view-grid-1::part(even-row-cell) { background-color:rgba(240,14,14,0); }
+
+vaadin-grid.home-view-grid-1::part(header-cell) { background-color:rgba(255,0,0,0); }
+
+vaadin-grid.home-view-grid-1::part(selected-row-cell) {
+  background-color:rgba(43,55,181,0.49);
+  font-size:var(--lumo-font-size-m);
+  font-weight:bold;
+}
+
+vaadin-grid.home-view-grid-2::part(selected-row-cell) {
+  background-color:rgba(43,55,181,0.49);
+  font-weight:bold;
+}
+
+vaadin-grid.open-product-grid-1::part(selected-row-cell) {
+  background-color:rgba(43,55,181,0.49);
+  font-weight:bold;
+}
+
+vaadin-grid.open-product-grid-2::part(selected-row-cell) {
+  background-color:rgba(43,55,181,0.49);
+  font-weight:bold;
+}
 
 vaadin-horizontal-layout.home-view-horizontal-layout-1 { background-color:rgba(176,176,176,1); }
 

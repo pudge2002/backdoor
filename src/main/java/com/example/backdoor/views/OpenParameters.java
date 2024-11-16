@@ -26,13 +26,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@PageTitle("Продукт")
-@Route("op")
+@PageTitle("Параметры")
+@Route("param")
 @Menu(order = 1, icon = "line-awesome/svg/pencil-ruler-solid.svg")
 @Uses(Icon.class)
-public class   OpenProduct extends Composite<VerticalLayout> {
+public class  OpenParameters extends Composite<VerticalLayout> {
 
-    public   OpenProduct() {
+    public   OpenParameters() {
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();
         //<theme-editor-local-classname>
@@ -78,7 +78,7 @@ public class   OpenProduct extends Composite<VerticalLayout> {
         layoutRow.addClassName(Gap.MEDIUM);
         layoutRow.setWidth("100%");
         layoutRow.getStyle().set("flex-grow", "1");
-        options.setText("Настройки");
+        options.setText("Редактирование параметра");
         options.setWidth("min-content");
         options.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonPrimary2.setText("Открыть");
@@ -107,11 +107,12 @@ public class   OpenProduct extends Composite<VerticalLayout> {
 
         VerticalLayout updateProd = new VerticalLayout(allProducts,name, typeStrah);
         updateProd.add(name);
-        getContent().add(updateProd);
+
         getContent().add(formLayout2Col);
-        formLayout2Col.add(header, grid1Header, basicGrid, basicGrid2, layoutRow);
+        VerticalLayout params = new VerticalLayout(grid1Header, basicGrid2, layoutRow2);
+        basicGrid2.setWidthFull();
+        formLayout2Col.add(updateProd, params);
         layoutRow.add(options);
-        formLayout2Col.add(layoutRow2);
         layoutRow2.add(addRisk,delRisk);
         HorizontalLayout hl = new HorizontalLayout();
         hl.add(new H1("dsdsds"));

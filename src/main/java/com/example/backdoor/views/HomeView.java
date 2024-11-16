@@ -43,7 +43,11 @@ public class HomeView extends Composite<VerticalLayout> {
         FormLayout formLayout2Col = new FormLayout();
 
         Grid<PropertyValue> basicGrid = new Grid<>(PropertyValue.class);
+        //<theme-editor-local-classname>
+        basicGrid.addClassName("home-view-grid-1");
         Grid<Role> basicGrid2 = new Grid<>(Role.class);
+        //<theme-editor-local-classname>
+        basicGrid2.addClassName("home-view-grid-2");
 
         HorizontalLayout layoutRow = new HorizontalLayout();
         //<theme-editor-local-classname>
@@ -112,6 +116,14 @@ public class HomeView extends Composite<VerticalLayout> {
         layoutRow.add(buttonPrimary4);
         formLayout2Col.add(layoutRow2);
         layoutRow2.add(buttonPrimary5);
+        buttonPrimary2.addClickListener(event -> {
+            PropertyValue selectedItem = basicGrid.asSingleSelect().getValue();
+            if (selectedItem != null) {
+                System.out.println("Выбранный элемент: " + selectedItem);
+            } else {
+                System.out.println("Ничего не выбрано");
+            }
+        });
     }
 
     private void setGridSampleData_product(Grid grid) {
