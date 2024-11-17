@@ -54,9 +54,6 @@ public class TypeInsured {
 
     @Override
     public String toString() {
-        return "TypeInsured{" +
-                "product=" + product +
-                ", type='" + type + '\'' +
-                '}';
+        return type;
     }
 }
