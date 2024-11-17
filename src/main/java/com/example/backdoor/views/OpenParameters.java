@@ -3,7 +3,9 @@ package com.example.backdoor.views;
 import com.example.backdoor.model.Product;
 import com.example.backdoor.model.Parametrs;
 
+import com.example.backdoor.model.ProductParametrsRelation;
 import com.example.backdoor.repos.ParametrsRepository;
+import com.example.backdoor.repos.ProductParametrsRelationRepository;
 import com.example.backdoor.repos.ProductRepository;
 import com.example.backdoor.repos.TypeInsuredRepository;
 import com.vaadin.flow.component.Composite;
@@ -35,10 +37,15 @@ import java.util.List;
 public class  OpenParameters extends Composite<VerticalLayout> {
     private final ParametrsRepository parametrsRepository;
     private final ProductRepository productRepository;
-    public OpenParameters(ParametrsRepository parametrsRepository, ParametrsRepository parametrsRepository1, ProductRepository productRepository) {
+
+
+    private final ProductParametrsRelationRepository productParametrsRelationRepository;
+    public OpenParameters(ParametrsRepository parametrsRepository, ParametrsRepository parametrsRepository1, ProductRepository productRepository, ProductParametrsRelationRepository productParametrsRelationRepository) {
         this.parametrsRepository = parametrsRepository1;
 
         this.productRepository = productRepository;
+        this.productParametrsRelationRepository = productParametrsRelationRepository;
+
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();
         //<theme-editor-local-classname>
@@ -105,12 +112,13 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
         List<Product> prod = productRepository.findAll();
+        List<Parametrs> strat = parametrsRepository.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-parameters-combo-box-1");
         //<theme-editor-local-classname>
         allProducts.addClassName("open-parameters-combo-box-1");
-        ComboBox name = new ComboBox("Выбор стратегии", prod);
+        ComboBox name = new ComboBox("Выбор стратегии", strat);
         //<theme-editor-local-classname>
         name.setOverlayClassName("open-parameters-combo-box-3");
         //<theme-editor-local-classname>
@@ -123,7 +131,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
 
 
 
-        VerticalLayout updateProd = new VerticalLayout(allProducts,name, typeStrah);
+        VerticalLayout updateProd = new VerticalLayout(allProducts,name);
         updateProd.setAlignItems(FlexComponent.Alignment.CENTER);
         updateProd.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         updateProd.addClassName("centered-layout");

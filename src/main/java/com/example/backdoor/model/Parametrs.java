@@ -78,12 +78,7 @@ public class Parametrs {
 
     @Override
     public String toString() {
-        return "Parametrs{" +
-                "sliceCount=" + sliceCount +
-                ", value='" + value + '\'' +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 }
 

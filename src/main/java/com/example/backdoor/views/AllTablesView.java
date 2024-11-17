@@ -96,8 +96,9 @@ public class AllTablesView extends VerticalLayout {
     private Grid<ProductParametrsRelation> createProductParametrsRelationGrid() {
         Grid<ProductParametrsRelation> grid = new Grid<>(ProductParametrsRelation.class);
         grid.setItems(productParametrsRelationRepository.findAll());
-        grid.setColumns("id", "parametrs.name", "product.name");
-        grid.getColumnByKey("id").setHeader("ID");
+        grid.setColumns("id","name", "parametrs.name", "product.name");
+        grid.getColumnByKey("id").setHeader("#");
+        grid.getColumnByKey("name").setHeader("Наименование");
         grid.getColumnByKey("parametrs.name").setHeader("Параметр");
         grid.getColumnByKey("product.name").setHeader("Продукт");
         return grid;

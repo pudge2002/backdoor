@@ -25,6 +25,16 @@ public class ProductParametrsRelation {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "name", nullable = false)
+    private String name;
     public ProductParametrsRelation() {
     }
 
@@ -55,9 +65,6 @@ public class ProductParametrsRelation {
 
     @Override
     public String toString() {
-        return "ProductParametrsRelation{" +
-                "product=" + product +
-                ", parametrs=" + parametrs +
-                '}';
+        return name;
     }
 }
