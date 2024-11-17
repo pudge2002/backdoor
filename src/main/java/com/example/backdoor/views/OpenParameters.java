@@ -48,7 +48,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         this.productRepository = productRepository;
         this.productParametrsRelationRepository = productParametrsRelationRepository;
 
-        ProductView selectedItem = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
+        ProductView product = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
 
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();

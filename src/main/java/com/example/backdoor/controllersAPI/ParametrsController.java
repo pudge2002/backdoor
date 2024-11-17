@@ -1,4 +1,4 @@
-package com.example.backdoor.controllers;
+package com.example.backdoor.controllersAPI;
 
 import com.example.backdoor.model.Parametrs;
 import com.example.backdoor.repos.ParametrsRepository;
