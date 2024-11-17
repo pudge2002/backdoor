@@ -52,10 +52,10 @@ public class OpenProduct extends Composite<VerticalLayout> {
 
         ProductView product = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
         FormLayout formLayout2Col = new FormLayout();
-        Grid<ProductParametrsRelation> basicGrid = new Grid(ProductParametrsRelation.class);
+        Grid<ProductParametrsRelation> basicGrid = createProductParametrsRelationGrid();
         //<theme-editor-local-classname>
         basicGrid.addClassName("open-product-grid-1");
-        Grid <Risk> basicGrid2 = new Grid(Risk.class);
+        Grid <Risk> basicGrid2 = createRiskGrid();
         //<theme-editor-local-classname>
         basicGrid2.addClassName("open-product-grid-2");
         HorizontalLayout layoutRow = new HorizontalLayout();
@@ -124,7 +124,7 @@ public class OpenProduct extends Composite<VerticalLayout> {
         delRisk.setText("Отвязать");
         delRisk.setWidth("min-content");
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonPrimary3.addClickListener(event -> {  UI.getCurrent().navigate("param"); });
+        options.addClickListener(event -> {  UI.getCurrent().navigate("param"); });
 
         List<ProductView> prod = productView.findAll();
 
@@ -156,7 +156,25 @@ public class OpenProduct extends Composite<VerticalLayout> {
         HorizontalLayout hl = new HorizontalLayout();
 
     }
+    private Grid<ProductParametrsRelation> createProductParametrsRelationGrid() {
+        Grid<ProductParametrsRelation> grid = new Grid<>(ProductParametrsRelation.class);
+        grid.setItems(sliceRelationRepository.findAll());
+        grid.setColumns("name", "parametrs.name", "product.name");
 
+        grid.getColumnByKey("name").setHeader("Наименование");
+        grid.getColumnByKey("parametrs.name").setHeader("Параметр");
+        grid.getColumnByKey("product.name").setHeader("Продукт");
+        return grid;
+    }
+    private Grid<Risk> createRiskGrid() {
+        Grid<Risk> grid = new Grid<>(Risk.class);
+        grid.setItems(riskRepository.findAll());
+        grid.setColumns( "name", "level", "product.name");
+        grid.getColumnByKey("name").setHeader("Наименование");
+        grid.getColumnByKey("level").setHeader("Уровень");
+        grid.getColumnByKey("product.name").setHeader("Продукт");
+        return grid;
+    }
     private void setGridSampleDataStrategy(Grid grid) {
         grid.setItems(sliceRelationRepository.findAll());
     }

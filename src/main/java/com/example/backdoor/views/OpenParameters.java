@@ -52,7 +52,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         Grid basicGrid = new Grid();
         //<theme-editor-local-classname>
         basicGrid.addClassName("open-product-grid-1");
-        Grid<Parametrs> basicGrid2 = new Grid(Parametrs.class);
+        Grid<Parametrs> basicGrid2 =createParametrsGrid();
         //<theme-editor-local-classname>
         basicGrid2.addClassName("open-product-grid-2");
         HorizontalLayout layoutRow = new HorizontalLayout();
@@ -124,11 +124,12 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         List<Product> prod = productRepository.findAll();
         List<ProductParametrsRelation> strat = productParametrsRelationRepository.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
+
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-parameters-combo-box-1");
         //<theme-editor-local-classname>
         allProducts.addClassName("open-parameters-combo-box-1");
-        ComboBox name = new ComboBox("Выбор стратегии", strat);
+        ComboBox name = new ComboBox("Выбор типа страхования", strat);
         //<theme-editor-local-classname>
         name.setOverlayClassName("open-parameters-combo-box-3");
         //<theme-editor-local-classname>
@@ -138,7 +139,11 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         typeStrah.setOverlayClassName("open-parameters-combo-box-2");
         //<theme-editor-local-classname>
         typeStrah.addClassName("open-parameters-combo-box-2");
-
+        if (product != null)
+        {
+            allProducts.setValue(product.getProduct().getName());
+            name.setValue(product.getTypeInsured().getType());
+        }
 
 
         VerticalLayout updateProd = new VerticalLayout(allProducts,name);
@@ -170,6 +175,17 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         });
     }
 
+    private Grid<Parametrs> createParametrsGrid() {
+        Grid<Parametrs> grid = new Grid<>(Parametrs.class);
+        grid.setItems(parametrsRepository.findAll());
+        grid.setColumns( "name", "type", "value", "sliceCount");
+
+        grid.getColumnByKey("name").setHeader("Наименование");
+        grid.getColumnByKey("type").setHeader("Тип");
+        grid.getColumnByKey("value").setHeader("Значение");
+        grid.getColumnByKey("sliceCount").setHeader("Количество разрезов");
+        return grid;
+    }
     private void showEditDialog(Parametrs property) {
         Dialog dialog = new Dialog();
         dialog.setWidth("400px");
