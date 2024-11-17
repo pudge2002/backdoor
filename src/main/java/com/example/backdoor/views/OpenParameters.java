@@ -39,8 +39,6 @@ import java.util.List;
 public class  OpenParameters extends Composite<VerticalLayout> {
     private final ParametrsRepository parametrsRepository;
     private final ProductRepository productRepository;
-
-
     private final ProductParametrsRelationRepository productParametrsRelationRepository;
     public OpenParameters(ParametrsRepository parametrsRepository, ParametrsRepository parametrsRepository1, ProductRepository productRepository, ProductParametrsRelationRepository productParametrsRelationRepository) {
 
@@ -48,7 +46,7 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         this.productRepository = productRepository;
         this.productParametrsRelationRepository = productParametrsRelationRepository;
 
-        ProductView selectedItem = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
+        ProductView product = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
 
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();
@@ -88,35 +86,43 @@ public class  OpenParameters extends Composite<VerticalLayout> {
         basicGrid.setWidth("1000px");
         basicGrid.getStyle().set("flex-grow", "0");
         setGridSampleData(basicGrid);
+
         basicGrid2.setWidth("250px");
         basicGrid2.getStyle().set("flex-grow", "0");
         setGridSampleData(basicGrid2);
+
         layoutRow.setHeightFull();
         layoutRow.addClassName(Gap.MEDIUM);
         layoutRow.setWidth("100%");
         layoutRow.getStyle().set("flex-grow", "1");
+
         options.setText("Редактирование параметра");
         options.setWidth("min-content");
         options.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         buttonPrimary2.setText("Открыть");
         buttonPrimary2.setWidth("min-content");
         buttonPrimary2.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         buttonPrimary3.setText("Настройки");
         buttonPrimary3.setWidth("min-content");
         buttonPrimary3.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         addRisk.setText("Редактировать параметр");
         addRisk.setWidth("min-content");
         addRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         layoutRow2.setHeightFull();
         layoutRow2.addClassName(Gap.MEDIUM);
         layoutRow2.setWidth("100%");
         layoutRow2.getStyle().set("flex-grow", "1");
+
         delRisk.setText("Редактировать разрез");
         delRisk.setWidth("min-content");
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
         List<Product> prod = productRepository.findAll();
-        List<Parametrs> strat = parametrsRepository.findAll();
+        List<ProductParametrsRelation> strat = productParametrsRelationRepository.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-parameters-combo-box-1");

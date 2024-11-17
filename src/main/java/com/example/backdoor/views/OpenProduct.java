@@ -16,7 +16,13 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+
 import com.vaadin.flow.router.*;
+
+import com.vaadin.flow.router.Menu;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
@@ -34,15 +40,17 @@ public class OpenProduct extends Composite<VerticalLayout> {
 
     private final RiskRepository riskRepository;
     private final ProductParametrsRelationRepository sliceRelationRepository;
+    private final TypeInsuredRepository typeInsuredRepository;
+
     private final ProductViewRepository productView;
 
-    public   OpenProduct(RiskRepository riskRepository, ProductParametrsRelationRepository sliceRelationRepository, ProductViewRepository productView) {
+    public   OpenProduct(RiskRepository riskRepository, ProductParametrsRelationRepository sliceRelationRepository, TypeInsuredRepository typeInsuredRepository, ProductViewRepository productView) {
         this.riskRepository = riskRepository;
         this.sliceRelationRepository = sliceRelationRepository;
+        this.typeInsuredRepository = typeInsuredRepository;
         this.productView = productView;
 
-        ProductView selectedItem = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
-
+        ProductView product = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
         FormLayout formLayout2Col = new FormLayout();
         Grid<ProductParametrsRelation> basicGrid = new Grid(ProductParametrsRelation.class);
         //<theme-editor-local-classname>
@@ -74,6 +82,7 @@ public class OpenProduct extends Composite<VerticalLayout> {
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
         formLayout2Col.setWidth("100%");
+
         H2 header = new H2("Стратегии");
         H2 grid1Header = new H2("Риски");
         //<theme-editor-local-classname>
@@ -81,36 +90,52 @@ public class OpenProduct extends Composite<VerticalLayout> {
         basicGrid.setWidth("1000px");
         basicGrid.getStyle().set("flex-grow", "0");
         setGridSampleDataStrategy(basicGrid);
+
         basicGrid2.setWidth("250px");
         basicGrid2.getStyle().set("flex-grow", "0");
         setGridSampleDataRisk(basicGrid2);
+
         layoutRow.setHeightFull();
         layoutRow.addClassName(Gap.MEDIUM);
         layoutRow.setWidth("100%");
         layoutRow.getStyle().set("flex-grow", "1");
+
         options.setText("Настройки");
         options.setWidth("min-content");
         options.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         buttonPrimary2.setText("Открыть");
         buttonPrimary2.setWidth("min-content");
         buttonPrimary2.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         buttonPrimary3.setText("Настройки");
         buttonPrimary3.setWidth("min-content");
         buttonPrimary3.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         addRisk.setText("Привязать");
         addRisk.setWidth("min-content");
         addRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
         layoutRow2.setHeightFull();
         layoutRow2.addClassName(Gap.MEDIUM);
         layoutRow2.setWidth("100%");
         layoutRow2.getStyle().set("flex-grow", "1");
+
         delRisk.setText("Отвязать");
         delRisk.setWidth("min-content");
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonPrimary3.addClickListener(event -> {  UI.getCurrent().navigate("param"); });
 
         List<ProductView> prod = productView.findAll();
+
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
+        List<TypeInsured> strat = typeInsuredRepository.findAll();
+        ComboBox allStrat = new ComboBox("Тип продукта", strat);
+        if (product != null) {
+            allProducts.setValue(product.getProduct().getName());
+            allStrat.setValue(product.getTypeInsured().getType());
+        }
+
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-product-combo-box-1");
         //<theme-editor-local-classname>
@@ -120,7 +145,7 @@ public class OpenProduct extends Composite<VerticalLayout> {
         name.setLabel("Наименование");
         typeStrah.setLabel("Вид страхования");
 
-        VerticalLayout updateProd = new VerticalLayout(allProducts,name, typeStrah);
+        VerticalLayout updateProd = new VerticalLayout(allProducts,name, allStrat);
         updateProd.add(name);
         getContent().add(updateProd);
         getContent().add(formLayout2Col);
@@ -129,7 +154,7 @@ public class OpenProduct extends Composite<VerticalLayout> {
         formLayout2Col.add(layoutRow2);
         layoutRow2.add(addRisk,delRisk);
         HorizontalLayout hl = new HorizontalLayout();
-        hl.add(new H1("dsdsds"));
+
     }
 
     private void setGridSampleDataStrategy(Grid grid) {
