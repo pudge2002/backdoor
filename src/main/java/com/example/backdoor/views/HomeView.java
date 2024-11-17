@@ -154,22 +154,23 @@ public class HomeView extends Composite<VerticalLayout> {
         TextField nameField = new TextField("Name");
         nameField.setValue(propertyValue.getProduct().getName());
         List<TypeInsured> strat = typeInsuredRepository.findAll();
-        ComboBox allStrat = new ComboBox("Тип продукта", strat);
+        ComboBox allStrat = new ComboBox("Тип страхования", strat);
         allStrat.setValue(propertyValue.getProduct().getName());
 
         Button saveButton = new Button("Сохранить", event -> {
             System.out.println(allStrat.getValue());
             Long typeIns = 0L;
             propertyValue.getProduct().setName(nameField.getValue());
-            if (allStrat.getValue() == "ОСАГО") {
-                typeIns = 1l;
-            }
-            if (allStrat.getValue() == "КАСКО") {
-                typeIns = 2l;
-            }
-            if (allStrat.getValue() == "Имущество") {
-                typeIns  = 3l;
-            }
+//            String res = allStrat.getValue();
+//            if (res.getType() == "ОСАГО") {
+//                typeIns = 1l;
+//            }
+//            if (res.getType() == "КАСКО") {
+//                typeIns = 2l;
+//            }
+//            if (res.getType() == "Имущество") {
+//                typeIns  = 3l;
+//            }
             propertyValue.getTypeInsured().setId(typeIns);
            productViewRepository.save(propertyValue);
             dialog.close();
