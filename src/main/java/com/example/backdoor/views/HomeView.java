@@ -1,6 +1,7 @@
 package com.example.backdoor.views;
 
 import com.example.backdoor.model.ProductView;
+import com.example.backdoor.repos.ProductViewRepository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -30,11 +31,11 @@ import com.example.backdoor.repos.RoleRepository;
 @Uses(Icon.class)
 public class HomeView extends Composite<VerticalLayout> {
 
-    private final ProductAccessRepository productAccessRepository;
+    private final ProductViewRepository productViewRepository;
     private final RoleRepository roleRepository;
 
-    public HomeView(ProductAccessRepository productAccessRepository, RoleRepository roleRepository) {
-        this.productAccessRepository = productAccessRepository;
+    public HomeView(ProductViewRepository productViewRepository, RoleRepository roleRepository) {
+        this.productViewRepository = productViewRepository;
         this.roleRepository = roleRepository;
         FormLayout formLayout2Col = new FormLayout();
 
@@ -149,7 +150,7 @@ public class HomeView extends Composite<VerticalLayout> {
     }
 
     private void setGridSampleData_product(Grid grid) {
-        grid.setItems(productAccessRepository.findAll());
+        grid.setItems(productViewRepository.findAll());
     }
 
     private void setGridSampleData_roles(Grid grid) {
