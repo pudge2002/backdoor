@@ -16,9 +16,8 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.Menu;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
 import com.example.backdoor.model.*;
@@ -31,15 +30,18 @@ import java.util.List;
 @Route("op")
 @Menu(order = 1, icon = "line-awesome/svg/pencil-ruler-solid.svg")
 @Uses(Icon.class)
-public class   OpenProduct extends Composite<VerticalLayout> {
+public class OpenProduct extends Composite<VerticalLayout> {
 
     private final RiskRepository riskRepository;
     private final ProductParametrsRelationRepository sliceRelationRepository;
-    private final  ProductRepository productRepository;
-    public   OpenProduct(RiskRepository riskRepository, RoleRepository roleRepository, ProductParametrsRelationRepository sliceRelationRepository, ProductRepository productRepository) {
+    private final ProductViewRepository productView;
+
+    public   OpenProduct(RiskRepository riskRepository, ProductParametrsRelationRepository sliceRelationRepository, ProductViewRepository productView) {
         this.riskRepository = riskRepository;
         this.sliceRelationRepository = sliceRelationRepository;
-        this.productRepository = productRepository;
+        this.productView = productView;
+
+        ProductView selectedItem = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
 
         FormLayout formLayout2Col = new FormLayout();
         Grid<ProductParametrsRelation> basicGrid = new Grid(ProductParametrsRelation.class);
@@ -107,7 +109,7 @@ public class   OpenProduct extends Composite<VerticalLayout> {
         delRisk.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonPrimary3.addClickListener(event -> {  UI.getCurrent().navigate("param"); });
 
-        List<Product> prod = productRepository.findAll();
+        List<ProductView> prod = productView.findAll();
         ComboBox allProducts = new ComboBox("Выбор продукта", prod);
         //<theme-editor-local-classname>
         allProducts.setOverlayClassName("open-product-combo-box-1");
@@ -136,4 +138,5 @@ public class   OpenProduct extends Composite<VerticalLayout> {
     private void setGridSampleDataRisk(Grid grid) {
         grid.setItems(riskRepository.findAll());
     }
+
 }

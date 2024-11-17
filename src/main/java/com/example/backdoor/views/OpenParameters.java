@@ -4,6 +4,7 @@ import com.example.backdoor.model.Product;
 import com.example.backdoor.model.Parametrs;
 
 import com.example.backdoor.model.ProductParametrsRelation;
+import com.example.backdoor.model.ProductView;
 import com.example.backdoor.repos.ParametrsRepository;
 import com.example.backdoor.repos.ProductParametrsRelationRepository;
 import com.example.backdoor.repos.ProductRepository;
@@ -26,6 +27,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
 import java.util.List;
@@ -41,10 +43,12 @@ public class  OpenParameters extends Composite<VerticalLayout> {
 
     private final ProductParametrsRelationRepository productParametrsRelationRepository;
     public OpenParameters(ParametrsRepository parametrsRepository, ParametrsRepository parametrsRepository1, ProductRepository productRepository, ProductParametrsRelationRepository productParametrsRelationRepository) {
-        this.parametrsRepository = parametrsRepository1;
 
+        this.parametrsRepository = parametrsRepository1;
         this.productRepository = productRepository;
         this.productParametrsRelationRepository = productParametrsRelationRepository;
+
+        ProductView selectedItem = (ProductView) VaadinSession.getCurrent().getAttribute("selectedItem");
 
         FormLayout formLayout2Col = new FormLayout();
         Grid basicGrid = new Grid();

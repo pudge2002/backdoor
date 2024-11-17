@@ -67,10 +67,6 @@ public class ProductView {
 
     @Override
     public String toString() {
-        return "ProductView{" +
-                "product=" + product +
-                ", risk=" + risk +
-                ", typeInsured=" + typeInsured +
-                '}';
+        return product.getName();
     }
 }

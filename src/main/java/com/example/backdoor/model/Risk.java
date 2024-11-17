@@ -58,10 +58,6 @@ public class Risk {
 
     @Override
     public String toString() {
-        return "Risk{" +
-                "product=" + product +
-                ", level=" + level +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 }

@@ -128,8 +128,7 @@ public class AllTablesView extends VerticalLayout {
     private Grid<ProductView> createProductViewGrid() {
         Grid<ProductView> grid = new Grid<>(ProductView.class);
         grid.setItems(productViewRepository.findAll());
-        grid.setColumns("id", "product.name", "risk.name", "typeInsured.type");
-        grid.getColumnByKey("id").setHeader("ID");
+        grid.setColumns("product.name", "risk.name", "typeInsured.type");
         grid.getColumnByKey("product.name").setHeader("Продукт");
         grid.getColumnByKey("risk.name").setHeader("Риск");
         grid.getColumnByKey("typeInsured.type").setHeader("Тип");
@@ -149,8 +148,7 @@ public class AllTablesView extends VerticalLayout {
     private Grid<Role> createRoleGrid() {
         Grid<Role> grid = new Grid<>(Role.class);
         grid.setItems(roleRepository.findAll());
-        grid.setColumns("id", "name");
-        grid.getColumnByKey("id").setHeader("ID");
+        grid.setColumns("name");
         grid.getColumnByKey("name").setHeader("Наименование");
         return grid;
     }
